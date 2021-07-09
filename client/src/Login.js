@@ -104,9 +104,9 @@ const Login = (props) => {
                   <InputAdornment position="end">
                     <Link
                       className={classes.forgetLink}
-                      onClick={() => history.push(path.forget)}
+                      onClick={() => history.push(path.forgot)}
                     >
-                      Forget?
+                      Forgot?
                     </Link>
                   </InputAdornment>
                 ),

@@ -8,7 +8,7 @@ import { Home, SnackbarError } from "./components";
 
 export const path = {
   login: "/login",
-  forget: "/forget",
+  forgot: "/forgot",
   register: "/register",
 };
 
