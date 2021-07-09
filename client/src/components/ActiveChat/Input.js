@@ -58,6 +58,7 @@ class Input extends Component {
             value={this.state.text}
             name="text"
             onChange={this.handleChange}
+            inputRef={(input) => input && input.focus()}
           />
         </FormControl>
       </form>
