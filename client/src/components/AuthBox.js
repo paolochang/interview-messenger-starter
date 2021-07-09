@@ -59,10 +59,6 @@ const useStyles = makeStyles((theme) => ({
   actionHeader: {
     display: "flex",
     position: "relative",
-
-    [theme.breakpoints.down("sm")]: {
-      justifyContent: "center",
-    },
   },
   actionContainer: {
     justifyContent: "flex-end",
@@ -70,10 +66,19 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     top: "20px",
     right: "20px",
+
+    [theme.breakpoints.down("xs")]: {
+      top: "10px",
+      right: "10px",
+    },
   },
   actionText: {
     margin: "2rem",
     color: "#AFAFAF",
+
+    [theme.breakpoints.down("xs")]: {
+      margin: "1rem",
+    },
   },
   buttonSecondary: {
     fontSize: "1em",
@@ -82,6 +87,11 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.main,
     boxShadow:
       "0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.19)",
+
+    [theme.breakpoints.down("xs")]: {
+      width: "8rem",
+      height: "3rem",
+    },
   },
   content: {
     display: "flex",
