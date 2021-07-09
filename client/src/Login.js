@@ -17,8 +17,8 @@ import AuthBox from "./components/AuthBox";
 
 const useStyles = makeStyles((theme) => ({
   form: {
-    marginTop: "5rem",
-    width: "70%",
+    display: "flex",
+    justifyContent: "center",
   },
   innerForm: {
     width: "90%",
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   button: {
-    margin: "4em 0",
+    marginTop: "4em",
   },
   buttonPrimary: {
     fontSize: "1em",
