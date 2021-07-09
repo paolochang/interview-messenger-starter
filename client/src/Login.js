@@ -11,6 +11,8 @@ import {
   Link,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { path } from "./routes";
 import { login } from "./store/utils/thunkCreators";
 import AuthBox from "./components/AuthBox";
@@ -55,6 +57,8 @@ const Login = (props) => {
   const classes = useStyles();
   const history = useHistory();
   const { user, login } = props;
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down("xs"));
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -71,7 +75,7 @@ const Login = (props) => {
   return (
     <AuthBox
       actionText="Don't have an account?"
-      buttonText="Create account"
+      buttonText={mobile ? "Join" : "Create account"}
       actionRoute={path.register}
     >
       <form onSubmit={handleLogin} className={classes.form}>
