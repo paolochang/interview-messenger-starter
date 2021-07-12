@@ -50,7 +50,7 @@ class Input extends Component {
     const { classes } = this.props;
     return (
       <form className={classes.root} onSubmit={this.handleSubmit}>
-        <FormControl fullWidth hiddenLabel>
+        <FormControl fullWidth hiddenLabel required>
           <FilledInput
             classes={{ root: classes.input }}
             disableUnderline
