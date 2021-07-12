@@ -6,6 +6,12 @@ import Signup from "./Signup.js";
 import Login from "./Login.js";
 import { Home, SnackbarError } from "./components";
 
+export const path = {
+  login: "/login",
+  forgot: "/forgot",
+  register: "/register",
+};
+
 const Routes = (props) => {
   const { user, fetchUser } = props;
   const [errorMessage, setErrorMessage] = useState("");

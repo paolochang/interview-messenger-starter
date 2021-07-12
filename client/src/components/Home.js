@@ -7,6 +7,7 @@ import { SidebarContainer } from "./Sidebar";
 import { ActiveChat } from "./ActiveChat";
 import { logout, fetchConversations } from "../store/utils/thunkCreators";
 import { clearOnLogout } from "../store/index";
+import { path } from "../routes";
 
 const styles = {
   root: {
@@ -42,8 +43,8 @@ class Home extends Component {
     const { classes } = this.props;
     if (!this.props.user.id) {
       // If we were previously logged in, redirect to login instead of register
-      if (this.state.isLoggedIn) return <Redirect to="/login" />;
-      return <Redirect to="/register" />;
+      if (this.state.isLoggedIn) return <Redirect to={path.login} />;
+      return <Redirect to={path.register} />;
     }
     return (
       <>
