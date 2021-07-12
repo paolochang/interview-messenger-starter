@@ -1,3 +1,13 @@
+export const addConversationsToStore = (state, payload) => {
+  const { conversations } = payload;
+  return conversations.map((convo) => {
+    return  {
+      ...convo,
+      messages: convo.messages.reverse()
+    };
+  });
+};
+
 export const addMessageToStore = (state, payload) => {
   const { message, sender } = payload;
   // if sender isn't null, that means the message needs to be put in a brand new convo

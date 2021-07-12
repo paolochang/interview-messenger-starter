@@ -1,4 +1,5 @@
 import {
+  addConversationsToStore,
   addNewConvoToStore,
   addOnlineUserToStore,
   addSearchedUsersToStore,
@@ -21,7 +22,7 @@ const ADD_CONVERSATION = "ADD_CONVERSATION";
 export const gotConversations = (conversations) => {
   return {
     type: GET_CONVERSATIONS,
-    conversations,
+    payload: { conversations },
   };
 };
 
@@ -72,7 +73,7 @@ export const addConversation = (recipientId, newMessage) => {
 const reducer = (state = [], action) => {
   switch (action.type) {
     case GET_CONVERSATIONS:
-      return action.conversations;
+      return addConversationsToStore(state, action.payload);
     case SET_MESSAGE:
       return addMessageToStore(state, action.payload);
     case ADD_ONLINE_USER: {
