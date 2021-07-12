@@ -1,9 +1,10 @@
 export const addConversationsToStore = (state, payload) => {
   const { conversations } = payload;
   return conversations.map((convo) => {
-    const convoCopy = { ...convo };
-    convoCopy.messages.reverse();
-    return convoCopy;
+    return  {
+      ...convo,
+      messages: convo.messages.reverse()
+    };
   });
 };
 
