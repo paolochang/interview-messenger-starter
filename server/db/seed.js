@@ -86,6 +86,7 @@ async function seed() {
     photoUrl:
       "https://res.cloudinary.com/dmlvthmqr/image/upload/v1607914466/messenger/6c4faa7d65bc24221c3d369a8889928158daede4_vk5tyg.png",
   });
+
   const hualingConvo = await Conversation.create({
     user2Id: hualing.id,
     user1Id: thomas.id,
@@ -118,6 +119,31 @@ async function seed() {
     attachments: ["file1"],
   });
 
+  const julia = await User.create({
+    username: "julia",
+    email: "julia@email.com",
+    password: "123456",
+    photoUrl:
+      "https://res.cloudinary.com/dmlvthmqr/image/upload/v1607914468/messenger/d9fc84a0d1d545d77e78aaad39c20c11d3355074_ed5gvz.png",
+  });
+
+  const juliaConvo = await Conversation.create({
+    user2Id: julia.id,
+    user1Id: thomas.id,
+  });
+
+  await Message.create({
+    conversationId: juliaConvo.id,
+    senderId: julia.id,
+    text: "Check this deal!",
+  });
+
+  await Message.create({
+    conversationId: juliaConvo.id,
+    senderId: julia.id,
+    text: "https://www.amazon.ca/gp/product/B085W6RZ1L?pf_rd_r=61G3JKBAA81587NMHVD5&pf_rd_p=05326fd5-c43e-4948-99b1-a65b129fdd73&pd_rd_r=2d29a7d8-1870-4fa1-bbc3-90044a1d40af&pd_rd_w=AZaM9&pd_rd_wg=oF9c3&ref_=pd_gw_unk",
+  });
+
   const otherUsers = await Promise.all([
     ,
     User.create({
@@ -126,14 +152,6 @@ async function seed() {
       password: "123456",
       photoUrl:
         "https://res.cloudinary.com/dmlvthmqr/image/upload/v1607914466/messenger/68f55f7799df6c8078a874cfe0a61a5e6e9e1687_e3kxp2.png",
-    }),
-    User.create({
-      username: "julia",
-
-      email: "julia@email.com",
-      password: "123456",
-      photoUrl:
-        "https://res.cloudinary.com/dmlvthmqr/image/upload/v1607914468/messenger/d9fc84a0d1d545d77e78aaad39c20c11d3355074_ed5gvz.png",
     }),
     User.create({
       username: "cheng",
