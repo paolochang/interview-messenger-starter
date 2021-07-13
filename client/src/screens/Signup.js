@@ -10,14 +10,15 @@ import {
   FormHelperText,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { path } from "./routes";
-import { register } from "./store/utils/thunkCreators";
-import AuthBox from "./components/AuthBox";
+import { path } from "../routes";
+import { register } from "../store/utils/thunkCreators";
+import AuthBox from "../components/AuthBox";
 
 const useStyles = makeStyles((theme) => ({
   form: {
     display: "flex",
     justifyContent: "center",
+    width: "90%",
   },
   createText: {
     fontSize: "2em",

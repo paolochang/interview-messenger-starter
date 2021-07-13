@@ -13,9 +13,9 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { path } from "./routes";
-import { login } from "./store/utils/thunkCreators";
-import AuthBox from "./components/AuthBox";
+import { path } from "../routes";
+import { login } from "../store/utils/thunkCreators";
+import AuthBox from "../components/AuthBox";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     width: "90%",
   },
   inputControl: {
-    width: "100%",
+    width: "90%",
     margin: "1rem 0",
   },
   welcomeText: {

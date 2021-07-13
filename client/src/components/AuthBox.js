@@ -100,6 +100,7 @@ const useStyles = makeStyles((theme) => ({
     alignSlef: "center",
     alignItems: "center",
     height: "50rem",
+    width: "30rem",
   },
 }));
 
@@ -134,23 +135,27 @@ const AuthBox = ({ children, actionText, buttonText, actionRoute }) => {
         justifyContent="flex-start"
         alignItems="center"
       >
-        <Grid
-          className={classes.actionHeader}
-          container
-          direction="row"
-          justifyContent="flex-end"
-          alignItems="center"
-        >
-          <Grid container className={classes.actionContainer}>
-            <Typography className={classes.actionText}>{actionText}</Typography>
-            <Button
-              onClick={() => history.push(`${actionRoute}`)}
-              className={classes.buttonSecondary}
-            >
-              {buttonText}
-            </Button>
+        {buttonText !== undefined && (
+          <Grid
+            className={classes.actionHeader}
+            container
+            direction="row"
+            justifyContent="flex-end"
+            alignItems="center"
+          >
+            <Grid container className={classes.actionContainer}>
+              <Typography className={classes.actionText}>
+                {actionText}
+              </Typography>
+              <Button
+                onClick={() => history.push(`${actionRoute}`)}
+                className={classes.buttonSecondary}
+              >
+                {buttonText}
+              </Button>
+            </Grid>
           </Grid>
-        </Grid>
+        )}
         <Grid container className={classes.content}>
           {children}
         </Grid>

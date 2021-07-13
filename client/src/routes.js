@@ -2,14 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchUser } from "./store/utils/thunkCreators";
-import Signup from "./Signup.js";
-import Login from "./Login.js";
 import { Home, SnackbarError } from "./components";
+import Signup from "./screens/Signup.js";
+import Login from "./screens/Login.js";
+import ForgotPassword from "./screens/ForgotPassword";
+import NotFound from "./screens/NotFound";
 
 export const path = {
   login: "/login",
   forgot: "/forgot",
   register: "/register",
+  home: "/home",
 };
 
 const Routes = (props) => {
@@ -48,6 +51,7 @@ const Routes = (props) => {
       )}
       <Switch>
         <Route path="/login" component={Login} />
+        <Route path="/forgot" component={ForgotPassword} />
         <Route path="/register" component={Signup} />
         <Route
           exact
@@ -55,6 +59,9 @@ const Routes = (props) => {
           render={(props) => (props.user?.id ? <Home /> : <Signup />)}
         />
         <Route path="/home" component={Home} />
+        <Route>
+          <NotFound />
+        </Route>
       </Switch>
     </>
   );
