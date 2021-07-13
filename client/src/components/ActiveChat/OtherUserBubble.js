@@ -9,14 +9,12 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     width: "100%",
   },
-  subroot: {
-    display: "flex",
-    flexDirection: "column",
-  },
   mixContainer: {
     margin: "5px 0",
     maxWidth: "30rem",
-    width: "auto",
+  },
+  imageRow: {
+    justifyContent: "flex-start",
   },
   avatar: {
     height: 30,
@@ -56,38 +54,32 @@ const OtherUserBubble = (props) => {
         src={otherUser.photoUrl}
         className={classes.avatar}
       ></Avatar>
-      <Box className={classes.subroot}>
+      <Box className={classes.mixContainer}>
         <Typography className={classes.usernameDate}>
           {otherUser.username} {time}
         </Typography>
-        {text !== "Sent photo" && attachments.length > 0 && (
+        {attachments.length > 0 && text !== "Sent photo" && (
           <Box className={classes.bubble}>
             <Typography className={classes.text}>{text}</Typography>
           </Box>
         )}
         {attachments.length > 1 ? (
-          <div className={classes.mixContainer}>
-            <Grid container>
-              {attachments.map((attachment, index) => (
-                <ImageBubble
-                  key={index}
-                  attachment={attachment}
-                  mine={mine}
-                  size={"sm"}
-                />
-              ))}
-            </Grid>
-          </div>
+          <Grid container className={classes.imageRow}>
+            {attachments.map((attachment, index) => (
+              <ImageBubble
+                key={index}
+                attachment={attachment}
+                mine={mine}
+                size={"sm"}
+              />
+            ))}
+          </Grid>
         ) : attachments.length === 1 ? (
-          <div className={classes.mixContainer}>
-            <ImageBubble attachment={attachments} mine={mine} />
-          </div>
+          <ImageBubble attachment={attachments} mine={mine} />
         ) : (
-          <div className={classes.mixContainer}>
-            <Box className={classes.bubble}>
-              <Typography className={classes.text}>{text}</Typography>
-            </Box>
-          </div>
+          <Box className={classes.bubble}>
+            <Typography className={classes.text}>{text}</Typography>
+          </Box>
         )}
         {link && <LinkBubble mine={mine} url={link[0]} />}
       </Box>

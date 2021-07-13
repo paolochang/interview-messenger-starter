@@ -23,6 +23,7 @@ const useStyles = makeStyles(() => ({
     maxWidth: "30rem",
   },
   imageRow: {
+    justifyContent: "flex-end",
     marginRight: "7px",
   },
   date: {
