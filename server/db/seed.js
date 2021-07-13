@@ -43,6 +43,12 @@ async function seed() {
     senderId: santiago.id,
     text: "Share photo of your city, please",
   });
+  await Message.create({
+    conversationId: santaigoConvo.id,
+    senderId: thomas.id,
+    text: "Check this out!",
+    attachments: ["file1", "file2"],
+  });
 
   const chiumbo = await User.create({
     username: "chiumbo",
@@ -61,6 +67,18 @@ async function seed() {
     text: "Sure! What time?",
   });
 
+  await Message.create({
+    conversationId: chiumboConvo.id,
+    senderId: thomas.id,
+    text: "At 3!",
+  });
+
+  await Message.create({
+    conversationId: chiumboConvo.id,
+    senderId: thomas.id,
+    text: "https://www.google.ca/maps/place/Rogers+Centre/@43.6417798,-79.3913324,17z/data=!3m1!4b1!4m5!3m4!1s0x882b34d7b66a4a51:0xe210b2f6fe0b1405!8m2!3d43.6417798!4d-79.3891437",
+  });
+
   const hualing = await User.create({
     username: "hualing",
     email: "hualing@email.com",
@@ -73,7 +91,7 @@ async function seed() {
     user1Id: thomas.id,
   });
 
-  for (let i = 0; i < 11; i++) {
+  for (let i = 0; i < 6; i++) {
     await Message.create({
       conversationId: hualingConvo.id,
       senderId: hualing.id,
@@ -84,7 +102,20 @@ async function seed() {
   await Message.create({
     conversationId: hualingConvo.id,
     senderId: hualing.id,
+    text: "https://www.youtube.com/watch?v=BkD2nN5275c",
+  });
+
+  await Message.create({
+    conversationId: hualingConvo.id,
+    senderId: hualing.id,
     text: "😂 😂 😂",
+  });
+
+  await Message.create({
+    conversationId: hualingConvo.id,
+    senderId: thomas.id,
+    text: "😙",
+    attachments: ["file1"],
   });
 
   const otherUsers = await Promise.all([

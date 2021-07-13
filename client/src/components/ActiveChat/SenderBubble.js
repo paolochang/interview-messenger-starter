@@ -45,16 +45,19 @@ const useStyles = makeStyles(() => ({
     background: "#F4F6FA",
     borderRadius: "10px 10px 0 10px",
     margin: "5px 15px 5px 5px",
+    overflowWrap: "anywhere",
   },
   bubbleWithSingle: {
     background: "#F4F6FA",
     borderRadius: "0 0 0 10px",
     margin: "0px 15px 5px 5px",
+    overflowWrap: "anywhere",
   },
   bubbleWithMulti: {
     background: "#F4F6FA",
     borderRadius: "0 0 0 10px",
     margin: "0px 15px 5px 5px",
+    overflowWrap: "anywhere",
   },
   avatar: {
     display: "flex",
@@ -75,45 +78,49 @@ const SenderBubble = (props) => {
   return (
     <Box className={classes.root}>
       <Box className={classes.subroot}>
-        {attachments.length > 1 ? (
-          <div className={classes.mixContainer}>
-            <Box className={classes.bubbleWithSingle}>
-              <Typography className={classes.text}>{text}</Typography>
-            </Box>
-            <Grid container className={classes.imageRow}>
-              {attachments.map((attachment, index) => (
-                <ImageBubble
-                  key={index}
-                  mine={mine}
-                  attachment={attachment}
-                  size={"sm"}
+        {attachments !== null ? (
+          <>
+            {attachments.length > 1 ? (
+              <div className={classes.mixContainer}>
+                <Box className={classes.bubbleWithSingle}>
+                  <Typography className={classes.text}>{text}</Typography>
+                </Box>
+                <Grid container className={classes.imageRow}>
+                  {attachments.map((attachment, index) => (
+                    <ImageBubble
+                      key={index}
+                      mine={mine}
+                      attachment={attachment}
+                      size={"sm"}
+                    />
+                  ))}
+                </Grid>
+                <Typography className={classes.date}>{time}</Typography>
+                <Avatar
+                  alt={user.username}
+                  src={user.photoUrl}
+                  className={classes.avatar}
                 />
-              ))}
-            </Grid>
-            <Typography className={classes.date}>{time}</Typography>
-            <Avatar
-              alt={user.username}
-              src={user.photoUrl}
-              className={classes.avatar}
-            />
-          </div>
-        ) : attachments.length === 1 ? (
-          <div className={classes.mixContainer}>
-            <Typography className={classes.date}>{time}</Typography>
-            <Grid container className={classes.imageRow}>
-              <ImageBubble mine={mine} />
-            </Grid>
-            {text !== "Sent photo" && (
-              <Box className={classes.bubbleWithSingle}>
-                <Typography className={classes.text}>{text}</Typography>
-              </Box>
+              </div>
+            ) : (
+              <div className={classes.mixContainer}>
+                <Typography className={classes.date}>{time}</Typography>
+                <Grid container className={classes.imageRow}>
+                  <ImageBubble mine={mine} />
+                </Grid>
+                {text !== "Sent photo" && (
+                  <Box className={classes.bubbleWithSingle}>
+                    <Typography className={classes.text}>{text}</Typography>
+                  </Box>
+                )}
+                <Avatar
+                  alt={user.username}
+                  src={user.photoUrl}
+                  className={classes.avatar}
+                />
+              </div>
             )}
-            <Avatar
-              alt={user.username}
-              src={user.photoUrl}
-              className={classes.avatar}
-            />
-          </div>
+          </>
         ) : (
           <div className={classes.mixContainer}>
             <Typography className={classes.date}>{time}</Typography>

@@ -31,6 +31,8 @@ const useStyles = makeStyles(() => ({
   bubble: {
     backgroundImage: "linear-gradient(225deg, #6CC1FF 0%, #3A8DFF 100%)",
     borderRadius: "0 10px 10px 10px",
+    width: "fit-content",
+    overflowWrap: "anywhere",
   },
   text: {
     fontSize: 14,
@@ -58,24 +60,28 @@ const OtherUserBubble = (props) => {
         <Typography className={classes.usernameDate}>
           {otherUser.username} {time}
         </Typography>
-        {attachments.length > 0 && text !== "Sent photo" && (
+        {attachments !== null && text !== "Sent photo" && (
           <Box className={classes.bubble}>
             <Typography className={classes.text}>{text}</Typography>
           </Box>
         )}
-        {attachments.length > 1 ? (
-          <Grid container className={classes.imageRow}>
-            {attachments.map((attachment, index) => (
-              <ImageBubble
-                key={index}
-                attachment={attachment}
-                mine={mine}
-                size={"sm"}
-              />
-            ))}
-          </Grid>
-        ) : attachments.length === 1 ? (
-          <ImageBubble attachment={attachments} mine={mine} />
+        {attachments !== null ? (
+          <>
+            {attachments.length > 1 ? (
+              <Grid container className={classes.imageRow}>
+                {attachments.map((attachment, index) => (
+                  <ImageBubble
+                    key={index}
+                    attachment={attachment}
+                    mine={mine}
+                    size={"sm"}
+                  />
+                ))}
+              </Grid>
+            ) : (
+              <ImageBubble attachment={attachments} mine={mine} />
+            )}
+          </>
         ) : (
           <Box className={classes.bubble}>
             <Typography className={classes.text}>{text}</Typography>
