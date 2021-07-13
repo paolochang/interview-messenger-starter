@@ -9,7 +9,7 @@ const styles = {
   root: {
     borderRadius: 8,
     height: 80,
-    boxShadow: "0 2px 10px 0 rgba(88,133,196,0.05)",
+    boxShadow: "0 2px 10px 0 rgba(88,133,196,0.2)",
     marginBottom: 10,
     display: "flex",
     alignItems: "center",
