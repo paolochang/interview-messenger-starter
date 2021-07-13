@@ -14,6 +14,10 @@ const useStyles = makeStyles((theme) => ({
     letterSpacing: -0.2,
   },
   previewText: {
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    maxWidth: "20rem",
     fontSize: 12,
     color: "#9CADC8",
     letterSpacing: -0.17,

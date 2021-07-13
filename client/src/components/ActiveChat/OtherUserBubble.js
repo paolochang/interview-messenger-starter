@@ -1,14 +1,22 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Box, Typography, Avatar } from "@material-ui/core";
-import ImageBubble from "./ImageBubble";
+import { ImageBubble, LinkBubble } from "../ActiveChat";
+import { useLinkFinder } from "../../hooks/useLinkFinder";
 
 const useStyles = makeStyles(() => ({
   root: {
     display: "flex",
+    width: "100%",
+  },
+  subroot: {
+    display: "flex",
+    flexDirection: "column",
   },
   mixContainer: {
     margin: "5px 0",
+    maxWidth: "30rem",
+    width: "auto",
   },
   avatar: {
     height: 30,
@@ -25,7 +33,6 @@ const useStyles = makeStyles(() => ({
   bubble: {
     backgroundImage: "linear-gradient(225deg, #6CC1FF 0%, #3A8DFF 100%)",
     borderRadius: "0 10px 10px 10px",
-    width: "fit-content",
   },
   text: {
     fontSize: 14,
@@ -40,6 +47,8 @@ const OtherUserBubble = (props) => {
   const classes = useStyles();
   const { text, time, otherUser, attachments, mine } = props;
 
+  const link = useLinkFinder(text);
+
   return (
     <Box className={classes.root}>
       <Avatar
@@ -47,7 +56,7 @@ const OtherUserBubble = (props) => {
         src={otherUser.photoUrl}
         className={classes.avatar}
       ></Avatar>
-      <Box>
+      <Box className={classes.subroot}>
         <Typography className={classes.usernameDate}>
           {otherUser.username} {time}
         </Typography>
@@ -74,10 +83,13 @@ const OtherUserBubble = (props) => {
             <ImageBubble attachment={attachments} mine={mine} />
           </div>
         ) : (
-          <Box className={classes.bubble}>
-            <Typography className={classes.text}>{text}</Typography>
-          </Box>
+          <div className={classes.mixContainer}>
+            <Box className={classes.bubble}>
+              <Typography className={classes.text}>{text}</Typography>
+            </Box>
+          </div>
         )}
+        {link && <LinkBubble mine={mine} url={link[0]} />}
       </Box>
     </Box>
   );

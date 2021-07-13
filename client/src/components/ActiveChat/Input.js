@@ -88,7 +88,10 @@ class Input extends Component {
 
     // add sender user info if posting to a brand new convo, so that the other user will have access to username, profile pic, etc.
     const reqBody = {
-      text: this.state.text !== "" ? this.state.text : "Sent photo",
+      text:
+        this.state.text !== ""
+          ? this.state.text.substring(0, 254)
+          : "Sent photo",
       recipientId: this.props.otherUser.id,
       conversationId: this.props.conversationId,
       sender: this.props.conversationId ? null : this.props.user,
