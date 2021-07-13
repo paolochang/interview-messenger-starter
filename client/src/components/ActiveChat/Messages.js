@@ -28,8 +28,6 @@ const Messages = (props) => {
     <Box className={classes.chatbox}>
       {messages.map((message) => {
         const time = moment(message.createdAt).format("h:mm");
-
-        console.log(message);
         return message.senderId === user.id ? (
           <SenderBubble
             key={message.id}

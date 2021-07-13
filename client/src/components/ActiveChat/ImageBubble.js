@@ -1,4 +1,5 @@
 import React from "react";
+import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
@@ -24,9 +25,9 @@ const ImageBubble = (props) => {
   let attachmentAlt = attachment.split("/").pop();
 
   return (
-    <div className={classes.root}>
+    <Grid className={classes.root}>
       <img className={classes.image} src={attachment} alt={attachmentAlt} />
-    </div>
+    </Grid>
   );
 };
 

@@ -34,7 +34,7 @@ export const addMessageToStore = (state, payload) => {
   });
 };
 
-export const addAttachmentsToStore = (state, payload) => {
+export const holdAttachmentsToStore = (state, payload) => {
   const { attachments } = payload;
   return attachments;
 };
