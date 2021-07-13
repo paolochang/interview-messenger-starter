@@ -13,6 +13,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { path } from "../routes";
 import { register } from "../store/utils/thunkCreators";
 import AuthBox from "../components/AuthBox";
+import MetaDecorator from "../utils/MetaDecorator";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -78,6 +79,10 @@ const Signup = (props) => {
       buttonText="Login"
       actionRoute={path.login}
     >
+      <MetaDecorator
+        title="Sign Up"
+        description="Sign up Messenger and converse with anyone with any language"
+      />
       <form onSubmit={handleRegister} className={classes.form}>
         <Grid className={classes.innerForm}>
           <Typography className={classes.createText}>

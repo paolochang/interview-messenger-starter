@@ -16,6 +16,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { path } from "../routes";
 import { login } from "../store/utils/thunkCreators";
 import AuthBox from "../components/AuthBox";
+import MetaDecorator from "../utils/MetaDecorator";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -78,6 +79,10 @@ const Login = (props) => {
       buttonText={mobile ? "Join" : "Create account"}
       actionRoute={path.register}
     >
+      <MetaDecorator
+        title="Login"
+        description="Login Messenger and converse with anyone with any language"
+      />
       <form onSubmit={handleLogin} className={classes.form}>
         <Grid item className={classes.innerForm}>
           <Typography className={classes.welcomeText}>Welcome back!</Typography>

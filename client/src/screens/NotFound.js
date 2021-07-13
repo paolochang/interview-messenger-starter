@@ -5,6 +5,7 @@ import { Grid, Typography, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { path } from "../routes";
 import AuthBox from "../components/AuthBox";
+import MetaDecorator from "../utils/MetaDecorator";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -26,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     fontSize: "1em",
     fontWeight: "600",
+  },
+  urlHighlight: {
+    color: "#22A7F0",
   },
   forgetLink: {
     "&:hover": {
@@ -54,11 +58,17 @@ const NotFound = (props) => {
 
   return (
     <AuthBox>
+      <MetaDecorator
+        title="404"
+        description="Page is not found on the server"
+      />
       <Grid item className={classes.container}>
         <Typography className={classes.errorCode}>404</Typography>
         <Typography className={classes.notFoundText}>Page Not Found</Typography>
         <Typography className={classes.description}>
-          Requested URL: {window.location.href}
+          Requested URL:
+          <br />
+          <span className={classes.urlHighlight}>{window.location.href}</span>
           <br />
           is not found on the Server
         </Typography>

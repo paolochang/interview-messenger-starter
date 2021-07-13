@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Box } from "@material-ui/core";
 import { Input, Header, Messages } from "./index";
 import { connect } from "react-redux";
+import MetaDecorator from "../../utils/MetaDecorator";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -27,6 +28,14 @@ const ActiveChat = (props) => {
 
   return (
     <Box className={classes.root}>
+      <MetaDecorator
+        title={
+          conversation.otherUser?.username
+            ? conversation.otherUser?.username
+            : "Home"
+        }
+        description="Let's chat with anyone with any language"
+      />
       {conversation.otherUser && (
         <>
           <Header

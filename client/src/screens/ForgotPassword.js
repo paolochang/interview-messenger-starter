@@ -9,6 +9,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { path } from "../routes";
 import AuthBox from "../components/AuthBox";
+import MetaDecorator from "../utils/MetaDecorator";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -68,6 +69,10 @@ const ForgotPassword = () => {
       buttonText="Login"
       actionRoute={path.login}
     >
+      <MetaDecorator
+        title="Forgot password"
+        description="Find password and converse with anyone with any language"
+      />
       <form onSubmit={handleLogin} className={classes.form}>
         <Grid item className={classes.innerForm}>
           <Typography className={classes.welcomeText}>
