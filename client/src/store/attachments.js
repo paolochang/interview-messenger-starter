@@ -1,4 +1,4 @@
-import { addAttachmentsToStore } from "./utils/reducerFunctions";
+import { holdAttachmentsToStore } from "./utils/reducerFunctions";
 
 // ACTIONS
 
@@ -16,7 +16,7 @@ export const setNewAttachments = (attachments, sender) => {
 const reducer = (state = "", action) => {
   switch (action.type) {
     case SET_ATTACHMENTS:
-      return addAttachmentsToStore(state, action.payload);
+      return holdAttachmentsToStore(state, action.payload);
     default:
       return state;
   }
