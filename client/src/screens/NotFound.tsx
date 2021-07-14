@@ -6,6 +6,7 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { path } from "../routes";
 import AuthBox from "../components/AuthBox";
 import MetaDecorator from "../utils/MetaDecorator";
+import { IUser } from "../type";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -54,7 +55,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
-  user: any;
+  user: IUser;
 }
 
 const NotFound: React.FC<Props> = ({ user }) => {

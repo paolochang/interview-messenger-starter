@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { BadgeAvatar } from "./index";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import CurrentUserMenu from "./CurrentUserMenu";
+import { IUser } from "../../type";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
-  user: any;
+  user: IUser;
 }
 
 const CurrentUser: React.FC<Props> = ({ user }) => {

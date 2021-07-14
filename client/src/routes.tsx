@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { fetchUser } from "./store/utils/thunkCreators";
 import { Home, SnackbarError } from "./components";
 import { Signup, Login, ForgotPassword, NotFound } from "./screens";
+import { IUser } from "./type";
 
 export const path = {
   login: "/login",
@@ -13,7 +14,7 @@ export const path = {
 };
 
 interface Props {
-  user: any;
+  user: IUser;
   fetchUser: any;
 }
 

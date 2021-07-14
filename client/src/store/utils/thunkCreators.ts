@@ -18,7 +18,7 @@ axios.interceptors.request.use(async function (config) {
 
 // USER THUNK CREATORS
 
-export const fetchUser = () => async (dispatch) => {
+export const fetchUser = () => async (dispatch: any) => {
   dispatch(setFetchingStatus(true));
   try {
     const { data } = await axios.get("/auth/user");
@@ -33,7 +33,7 @@ export const fetchUser = () => async (dispatch) => {
   }
 };
 
-export const register = (credentials) => async (dispatch) => {
+export const register = (credentials: any) => async (dispatch: any) => {
   try {
     const { data } = await axios.post("/auth/register", credentials);
     await localStorage.setItem("messenger-token", data.token);
@@ -45,7 +45,7 @@ export const register = (credentials) => async (dispatch) => {
   }
 };
 
-export const login = (credentials) => async (dispatch) => {
+export const login = (credentials: any) => async (dispatch: any) => {
   try {
     const { data } = await axios.post("/auth/login", credentials);
     await localStorage.setItem("messenger-token", data.token);
@@ -57,7 +57,7 @@ export const login = (credentials) => async (dispatch) => {
   }
 };
 
-export const logout = (id) => async (dispatch) => {
+export const logout = (id: number) => async (dispatch: any) => {
   try {
     await axios.delete("/auth/logout");
     await localStorage.removeItem("messenger-token");
@@ -70,7 +70,7 @@ export const logout = (id) => async (dispatch) => {
 
 // CONVERSATIONS THUNK CREATORS
 
-export const fetchConversations = () => async (dispatch) => {
+export const fetchConversations = () => async (dispatch: any) => {
   try {
     const { data } = await axios.get("/api/conversations");
     dispatch(gotConversations(data));
@@ -79,12 +79,12 @@ export const fetchConversations = () => async (dispatch) => {
   }
 };
 
-const saveMessage = async (body) => {
+const saveMessage = async (body: any) => {
   const { data } = await axios.post("/api/messages", body);
   return data;
 };
 
-const sendMessage = (data, body) => {
+const sendMessage = (data: any, body: any) => {
   socket.emit("new-message", {
     message: data.message,
     recipientId: body.recipientId,
@@ -94,7 +94,7 @@ const sendMessage = (data, body) => {
 
 // message format to send: {recipientId, text, conversationId}
 // conversationId will be set to null if its a brand new conversation
-export const postMessage = (body) => async (dispatch) => {
+export const postMessage = (body: any) => async (dispatch: any) => {
   try {
     const data = await saveMessage(body);
 
@@ -110,19 +110,19 @@ export const postMessage = (body) => async (dispatch) => {
   }
 };
 
-const sendAttachments = (data, body) => {
+const sendAttachments = (data: any, body: any) => {
   socket.emit("new-attachments", {
     attachments: data.attachments,
     sender: data.sender,
   });
 };
 
-export const postAttachments = (body) => async (dispatch) => {
+export const postAttachments = (body: any) => async (dispatch: any) => {
   try {
     const { attachments } = body;
     const formData = new FormData();
 
-    const config = {
+    const config: any = {
       header: { "content-type": "multipart/form-data" },
     };
 
@@ -137,7 +137,7 @@ export const postAttachments = (body) => async (dispatch) => {
   } catch (error) {}
 };
 
-export const searchUsers = (searchTerm) => async (dispatch) => {
+export const searchUsers = (searchTerm: any) => async (dispatch: any) => {
   try {
     const { data } = await axios.get(`/api/users/${searchTerm}`);
     dispatch(setSearchedUsers(data));

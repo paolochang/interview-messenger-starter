@@ -17,6 +17,7 @@ import { path } from "../routes";
 import { login } from "../store/utils/thunkCreators";
 import AuthBox from "../components/AuthBox";
 import MetaDecorator from "../utils/MetaDecorator";
+import { IUser } from "../type";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -57,7 +58,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
-  user: any;
+  user: IUser;
   login: any;
 }
 

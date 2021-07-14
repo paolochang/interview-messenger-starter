@@ -3,6 +3,7 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Grid, Box, Typography, Avatar } from "@material-ui/core";
 import { ImageBubble, LinkBubble } from ".";
 import { useLinkFinder } from "../../hooks/useLinkFinder";
+import { IUser } from "../../type";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -74,7 +75,7 @@ const useStyles = makeStyles((theme: Theme) =>
 interface Props {
   text: string;
   time: string;
-  user: any;
+  user: IUser;
   attachments: string[];
   mine: boolean;
 }

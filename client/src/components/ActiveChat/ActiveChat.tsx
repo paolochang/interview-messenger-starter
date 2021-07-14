@@ -4,6 +4,7 @@ import { Box } from "@material-ui/core";
 import { Input, Header, Messages } from "./index";
 import { connect } from "react-redux";
 import MetaDecorator from "../../utils/MetaDecorator";
+import { IConversation } from "../../type";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,8 +25,8 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
-  user: any;
-  conversation: any;
+  user?: any;
+  conversation?: any;
 }
 
 const ActiveChat: React.FC<Props> = ({ user, conversation: convo }) => {
@@ -57,7 +58,7 @@ const ActiveChat: React.FC<Props> = ({ user, conversation: convo }) => {
             <Input
               otherUser={conversation.otherUser}
               conversationId={conversation.id}
-              user={user}
+              // user={user}
             />
           </Box>
         </>
@@ -72,7 +73,7 @@ const mapStateToProps = (state: any) => {
     conversation:
       state.conversations &&
       state.conversations.find(
-        (conversation: any) =>
+        (conversation: IConversation) =>
           conversation.otherUser.username === state.activeConversation
       ),
   };

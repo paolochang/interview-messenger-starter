@@ -1,3 +1,4 @@
+import { IConversation, IMessage, IUser } from "../type";
 import {
   addConversationsToStore,
   addNewConvoToStore,
@@ -19,35 +20,35 @@ const ADD_CONVERSATION = "ADD_CONVERSATION";
 
 // ACTION CREATORS
 
-export const gotConversations = (conversations) => {
+export const gotConversations = (conversations: IConversation) => {
   return {
     type: GET_CONVERSATIONS,
     payload: { conversations },
   };
 };
 
-export const setNewMessage = (message, sender) => {
+export const setNewMessage = (message: IMessage, sender: any = undefined) => {
   return {
     type: SET_MESSAGE,
     payload: { message, sender: sender || null },
   };
 };
 
-export const addOnlineUser = (id) => {
+export const addOnlineUser = (id: number) => {
   return {
     type: ADD_ONLINE_USER,
     id,
   };
 };
 
-export const removeOfflineUser = (id) => {
+export const removeOfflineUser = (id: number) => {
   return {
     type: REMOVE_OFFLINE_USER,
     id,
   };
 };
 
-export const setSearchedUsers = (users) => {
+export const setSearchedUsers = (users: IUser[]) => {
   return {
     type: SET_SEARCHED_USERS,
     users,
@@ -61,7 +62,7 @@ export const clearSearchedUsers = () => {
 };
 
 // add new conversation when sending a new message
-export const addConversation = (recipientId, newMessage) => {
+export const addConversation = (recipientId: number, newMessage: IMessage) => {
   return {
     type: ADD_CONVERSATION,
     payload: { recipientId, newMessage },
@@ -70,7 +71,7 @@ export const addConversation = (recipientId, newMessage) => {
 
 // REDUCER
 
-const reducer = (state = [], action) => {
+const reducer = (state = [], action: any) => {
   switch (action.type) {
     case GET_CONVERSATIONS:
       return addConversationsToStore(state, action.payload);
@@ -85,7 +86,7 @@ const reducer = (state = [], action) => {
     case SET_SEARCHED_USERS:
       return addSearchedUsersToStore(state, action.users);
     case CLEAR_SEARCHED_USERS:
-      return state.filter((convo) => convo.id);
+      return state.filter((convo: IConversation) => convo.id);
     case ADD_CONVERSATION:
       return addNewConvoToStore(
         state,

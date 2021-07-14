@@ -2,9 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet-async";
 
-const MetaDecorator = (props) => {
-  const { title, description } = props;
+interface Props {
+  title: string;
+  description: string;
+}
 
+const MetaDecorator: React.FC<Props> = ({ title, description }) => {
   const browserTitle = `${title} | Messenger`;
 
   return (

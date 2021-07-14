@@ -5,6 +5,7 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { useClickOutside } from "../../hooks/useClickOutside";
 import { logout } from "../../store/utils/thunkCreators";
 import { clearOnLogout } from "../../store/index";
+import { IUser } from "../../type";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
-  user: any;
+  user: IUser;
   logout: any;
   isDropdown: boolean;
   setIsDropdown: Dispatch<SetStateAction<boolean>>;

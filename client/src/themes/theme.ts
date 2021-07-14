@@ -1,6 +1,7 @@
 import { createTheme } from "@material-ui/core";
+import {  Theme } from "@material-ui/core/styles";
 
-export const theme = createTheme({
+export const theme: Theme = createTheme({
   typography: {
     fontFamily: "Open Sans, sans-serif",
     fontSize: 14,

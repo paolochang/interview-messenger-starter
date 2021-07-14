@@ -3,6 +3,7 @@ import { Box, Typography } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { Search, Chat, CurrentUser } from "./index";
+import { IConversation } from "../../type";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,10 +44,10 @@ const Sidebar: React.FC<Props> = ({
       <Typography className={classes.title}>Chats</Typography>
       <Search handleChange={handleChange} />
       {conversations
-        .filter((conversation: any) =>
+        .filter((conversation: IConversation) =>
           conversation.otherUser.username.includes(searchTerm)
         )
-        .map((conversation: any) => {
+        .map((conversation: IConversation) => {
           return (
             <Chat
               conversation={conversation}

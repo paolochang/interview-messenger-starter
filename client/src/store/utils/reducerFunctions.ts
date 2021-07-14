@@ -1,6 +1,8 @@
-export const addConversationsToStore = (state, payload) => {
+import { IConversation, IMessage, IUser } from "../../type";
+
+export const addConversationsToStore = (state: any, payload: any) => {
   const { conversations } = payload;
-  return conversations.map((convo) => {
+  return conversations.map((convo: IConversation) => {
     return {
       ...convo,
       messages: convo.messages.reverse(),
@@ -8,7 +10,7 @@ export const addConversationsToStore = (state, payload) => {
   });
 };
 
-export const addMessageToStore = (state, payload) => {
+export const addMessageToStore = (state: any, payload: any) => {
   const { message, sender } = payload;
   // if sender isn't null, that means the message needs to be put in a brand new convo
   if (sender !== null) {
@@ -16,12 +18,13 @@ export const addMessageToStore = (state, payload) => {
       id: message.conversationId,
       otherUser: sender,
       messages: [message],
+      latestMessageText: null,
     };
     newConvo.latestMessageText = message.text;
     return [newConvo, ...state];
   }
 
-  return state.map((convo) => {
+  return state.map((convo: IConversation) => {
     if (convo.id === message.conversationId) {
       const convoCopy = { ...convo };
       convoCopy.messages.push(message);
@@ -34,13 +37,20 @@ export const addMessageToStore = (state, payload) => {
   });
 };
 
-export const holdAttachmentsToStore = (state, payload) => {
+interface IAttachmentsPayload {
+  attachments: string[];
+}
+
+export const holdAttachmentsToStore = (
+  state: any,
+  payload: IAttachmentsPayload
+) => {
   const { attachments } = payload;
   return attachments;
 };
 
-export const addOnlineUserToStore = (state, id) => {
-  return state.map((convo) => {
+export const addOnlineUserToStore = (state: any, id: number) => {
+  return state.map((convo: IConversation) => {
     if (convo.otherUser.id === id) {
       const convoCopy = { ...convo };
       convoCopy.otherUser.online = true;
@@ -51,8 +61,8 @@ export const addOnlineUserToStore = (state, id) => {
   });
 };
 
-export const removeOfflineUserFromStore = (state, id) => {
-  return state.map((convo) => {
+export const removeOfflineUserFromStore = (state: any, id: number) => {
+  return state.map((convo: IConversation) => {
     if (convo.otherUser.id === id) {
       const convoCopy = { ...convo };
       convoCopy.otherUser.online = false;
@@ -63,16 +73,16 @@ export const removeOfflineUserFromStore = (state, id) => {
   });
 };
 
-export const addSearchedUsersToStore = (state, users) => {
-  const currentUsers = {};
+export const addSearchedUsersToStore = (state: any, users: IUser[]) => {
+  const currentUsers: any = {};
 
   // make table of current users so we can lookup faster
-  state.forEach((convo) => {
+  state.forEach((convo: IConversation) => {
     currentUsers[convo.otherUser.id] = true;
   });
 
   const newState = [...state];
-  users.forEach((user) => {
+  users.forEach((user: any) => {
     // only create a fake convo if we don't already have a convo with this user
     if (!currentUsers[user.id]) {
       let fakeConvo = { otherUser: user, messages: [] };
@@ -83,8 +93,12 @@ export const addSearchedUsersToStore = (state, users) => {
   return newState;
 };
 
-export const addNewConvoToStore = (state, recipientId, message) => {
-  return state.map((convo) => {
+export const addNewConvoToStore = (
+  state: any,
+  recipientId: number,
+  message: IMessage
+) => {
+  return state.map((convo: IConversation) => {
     if (convo.otherUser.id === recipientId) {
       const newConvo = { ...convo };
       newConvo.id = message.conversationId;

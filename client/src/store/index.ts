@@ -21,7 +21,8 @@ const appReducer = combineReducers({
   activeConversation,
   attachments,
 });
-const rootReducer = (state, action) => {
+
+const rootReducer = (state: any, action: any) => {
   if (action.type === CLEAR_ON_LOGOUT) {
     // set state to initial state
     state = undefined;

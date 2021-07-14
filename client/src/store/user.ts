@@ -5,28 +5,28 @@ const SET_FETCHING_STATUS = "SET_FETCHING_STATUS";
 
 // ACTION CREATORS
 
-export const gotUser = (user) => {
+export const gotUser = (user: any) => {
   return {
     type: GET_USER,
-    user
+    user,
   };
 };
 
-export const setFetchingStatus = (isFetching) => ({
+export const setFetchingStatus = (isFetching: boolean) => ({
   type: SET_FETCHING_STATUS,
-  isFetching
+  isFetching,
 });
 
 // REDUCER
 
-const reducer = (state = { isFetching: true }, action) => {
+const reducer = (state = { isFetching: true }, action: any) => {
   switch (action.type) {
     case GET_USER:
       return action.user;
     case SET_FETCHING_STATUS:
       return {
         ...state,
-        isFetching: action.isFetching
+        isFetching: action.isFetching,
       };
     default:
       return state;
