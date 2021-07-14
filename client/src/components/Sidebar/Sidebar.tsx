@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingRight: 21,
       flexGrow: 1,
       maxWidth: "25%",
+      minWidth: "20rem",
       overflow: "hidden",
     },
     title: {

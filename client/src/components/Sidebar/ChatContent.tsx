@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Typography } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { IConversation } from "../../type";
 
 interface styleProps {
   windowWidth: number;
@@ -13,7 +14,9 @@ const useStyles = makeStyles<Theme, styleProps>((theme) =>
       justifyContent: "space-between",
       marginLeft: 20,
       flexGrow: 1,
+      width: "80%",
     },
+    container: { width: "inherit" },
     username: {
       fontWeight: "bold",
       letterSpacing: -0.2,
@@ -22,7 +25,7 @@ const useStyles = makeStyles<Theme, styleProps>((theme) =>
       textOverflow: "ellipsis",
       whiteSpace: "nowrap",
       overflow: "hidden",
-      maxWidth: (props) => `calc(100vh / (${props.windowWidth / 220}))`,
+      maxWidth: "inherit",
       fontSize: 12,
       color: "#9CADC8",
       letterSpacing: -0.17,
@@ -45,7 +48,7 @@ const useStyles = makeStyles<Theme, styleProps>((theme) =>
 );
 
 interface Props {
-  conversation: any;
+  conversation: IConversation;
 }
 
 const ChatContent: React.FC<Props> = ({ conversation }) => {
@@ -56,7 +59,7 @@ const ChatContent: React.FC<Props> = ({ conversation }) => {
 
   return (
     <Box className={classes.root}>
-      <Box>
+      <Box className={classes.container}>
         <Typography className={classes.username}>
           {otherUser.username}
         </Typography>
