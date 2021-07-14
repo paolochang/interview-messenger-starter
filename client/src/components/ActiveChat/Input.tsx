@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import {
   Grid,
   FormControl,
@@ -58,7 +58,7 @@ const Input: React.FC<Props> = ({
   const classes = useStyles();
   const [text, setText] = useState("");
   const [images, setImages] = useState([]);
-  const [cursorPosition, setCursorPosition] = useState(null);
+  const [cursorPosition, setCursorPosition] = useState<number>();
   const [isEmoji, setIsEmoji] = useState<boolean>(false);
   const textRef = useRef<any>(null);
   const fileRef = useRef<HTMLInputElement>(null);
@@ -67,30 +67,24 @@ const Input: React.FC<Props> = ({
     setIsEmoji((prev) => !prev);
   };
 
+  useEffect(() => {
+    if (cursorPosition) {
+      textRef.current!.firstChild!.setSelectionRange(
+        cursorPosition,
+        cursorPosition
+      );
+    }
+  }, [cursorPosition]);
+
   const handleEmojiPick = (e: any, { emoji }: { emoji: any }) => {
     const ref = textRef.current?.firstChild;
     ref.focus();
     const startString = text.substring(0, ref.selectionStart);
     const endString = text.substring(ref.selectionStart);
     const newString = startString + emoji + endString;
-    handleEmojiBox();
     setText(newString);
     setCursorPosition(startString.length + emoji.length);
-
-    //TODO: cursor position always at the end of line
-    ref.selectionStart = cursorPosition;
-
-    // this.setState(
-    //   {
-    //     text: newString,
-    //     cursorPosition: startString.length + emoji.length,
-    //   },
-    //   () => {
-    //     this.textRef.current.firstChild.selectionStart =
-    //       this.textRef.current.firstChild.selectionEnd =
-    //         this.state.cursorPosition;
-    //   }
-    // );
+    handleEmojiBox();
   };
 
   const handleSubmit = async (event: any) => {
