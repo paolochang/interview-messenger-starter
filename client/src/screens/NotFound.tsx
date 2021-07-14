@@ -2,59 +2,64 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { Grid, Typography, Button } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { path } from "../routes";
 import AuthBox from "../components/AuthBox";
 import MetaDecorator from "../utils/MetaDecorator";
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "90%",
-  },
-  errorCode: {
-    fontSize: "10em",
-    fontWeight: "600",
-  },
-  notFoundText: {
-    fontSize: "2em",
-    fontWeight: "600",
-  },
-  description: {
-    textAlign: "center",
-    fontSize: "1em",
-    fontWeight: "600",
-  },
-  urlHighlight: {
-    color: "#22A7F0",
-  },
-  forgetLink: {
-    "&:hover": {
-      cursor: "pointer",
-      textDecoration: "none",
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    container: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      width: "90%",
     },
-  },
-  button: {
-    marginTop: "4em",
-  },
-  buttonPrimary: {
-    fontSize: "1em",
-    fontWeight: "600",
-    width: "12rem",
-    padding: "1em 0",
-    backgroundColor: theme.palette.primary.main,
-    color: "#FFFFFF",
-    border: "none",
-  },
-}));
+    errorCode: {
+      fontSize: "10em",
+      fontWeight: 600,
+    },
+    notFoundText: {
+      fontSize: "2em",
+      fontWeight: 600,
+    },
+    description: {
+      textAlign: "center",
+      fontSize: "1em",
+      fontWeight: 600,
+    },
+    urlHighlight: {
+      color: "#22A7F0",
+    },
+    forgetLink: {
+      "&:hover": {
+        cursor: "pointer",
+        textDecoration: "none",
+      },
+    },
+    button: {
+      marginTop: "4em",
+    },
+    buttonPrimary: {
+      fontSize: "1em",
+      fontWeight: 600,
+      width: "12rem",
+      padding: "1em 0",
+      backgroundColor: theme.palette.primary.main,
+      color: "#FFFFFF",
+      border: "none",
+    },
+  })
+);
 
-const NotFound = (props) => {
+interface Props {
+  user: any;
+}
+
+const NotFound: React.FC<Props> = ({ user }) => {
   const classes = useStyles();
   const history = useHistory();
-  const { user } = props;
 
   return (
     <AuthBox>
@@ -90,7 +95,7 @@ const NotFound = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
   return {
     user: state.user,
   };

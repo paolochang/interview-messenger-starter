@@ -1,26 +1,39 @@
-import React, { useRef } from "react";
+import React, { Dispatch, SetStateAction, useRef } from "react";
 import { connect } from "react-redux";
 import { MenuList, MenuItem } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { useClickOutside } from "../../hooks/useClickOutside";
 import { logout } from "../../store/utils/thunkCreators";
 import { clearOnLogout } from "../../store/index";
 
-const useStyles = makeStyles(() => ({
-  container: {
-    position: "relative",
-    float: "right",
-    boxShadow: "0 2px 10px 0 rgba(88,133,196,0.2)",
-    width: "100px",
-    borderRadius: "4px",
-    padding: "10px",
-    marginRight: "35px",
-  },
-}));
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    container: {
+      position: "relative",
+      float: "right",
+      boxShadow: "0 2px 10px 0 rgba(88,133,196,0.2)",
+      width: "100px",
+      borderRadius: "4px",
+      padding: "10px",
+      marginRight: "35px",
+    },
+  })
+);
 
-const CurrentUserMenu = (props) => {
+interface Props {
+  user: any;
+  logout: any;
+  isDropdown: boolean;
+  setIsDropdown: Dispatch<SetStateAction<boolean>>;
+}
+
+const CurrentUserMenu: React.FC<Props> = ({
+  user,
+  logout,
+  isDropdown,
+  setIsDropdown,
+}) => {
   const classes = useStyles();
-  const { user, logout, isDropdown, setIsDropdown } = props;
   const menuRef = useRef(null);
 
   const onClickOutsideMenu = () => {
@@ -29,7 +42,7 @@ const CurrentUserMenu = (props) => {
 
   useClickOutside(menuRef, isDropdown, onClickOutsideMenu);
 
-  const handleLogout = async (event) => {
+  const handleLogout = async (event: any) => {
     event.preventDefault();
     await logout(user.id);
   };
@@ -45,15 +58,15 @@ const CurrentUserMenu = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
   return {
     user: state.user,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: any) => {
   return {
-    logout: (id) => {
+    logout: (id: number) => {
       dispatch(logout(id));
       dispatch(clearOnLogout());
     },

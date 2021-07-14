@@ -1,8 +1,13 @@
 import { useEffect } from "react";
 
-export const useClickOutside = (ref, visibility, actionHandler) => {
+export const useClickOutside = (
+  ref: any,
+  visibility: boolean,
+  actionHandler: any
+) => {
+  console.log(ref, visibility, actionHandler);
   useEffect(() => {
-    const handleClick = (e) => {
+    const handleClick = (e: any) => {
       if (ref.current && !ref.current.contains(e.target)) {
         actionHandler();
       }

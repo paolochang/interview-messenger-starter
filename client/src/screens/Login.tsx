@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import {
@@ -10,7 +10,7 @@ import {
   InputAdornment,
   Link,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { path } from "../routes";
@@ -18,54 +18,61 @@ import { login } from "../store/utils/thunkCreators";
 import AuthBox from "../components/AuthBox";
 import MetaDecorator from "../utils/MetaDecorator";
 
-const useStyles = makeStyles((theme) => ({
-  form: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  innerForm: {
-    width: "90%",
-  },
-  inputControl: {
-    width: "90%",
-    margin: "1rem 0",
-  },
-  welcomeText: {
-    fontSize: "2em",
-    fontWeight: "600",
-  },
-  forgetLink: {
-    "&:hover": {
-      cursor: "pointer",
-      textDecoration: "none",
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    form: {
+      display: "flex",
+      justifyContent: "center",
     },
-  },
-  button: {
-    marginTop: "4em",
-  },
-  buttonPrimary: {
-    fontSize: "1em",
-    fontWeight: "600",
-    width: "12rem",
-    padding: "1em 0",
-    backgroundColor: theme.palette.primary.main,
-    color: "#FFFFFF",
-    border: "none",
-  },
-}));
+    innerForm: {
+      width: "90%",
+    },
+    inputControl: {
+      width: "90%",
+      margin: "1rem 0",
+    },
+    welcomeText: {
+      fontSize: "2em",
+      fontWeight: 600,
+    },
+    forgetLink: {
+      "&:hover": {
+        cursor: "pointer",
+        textDecoration: "none",
+      },
+    },
+    button: {
+      marginTop: "4em",
+    },
+    buttonPrimary: {
+      fontSize: "1em",
+      fontWeight: 600,
+      width: "12rem",
+      padding: "1em 0",
+      backgroundColor: theme.palette.primary.main,
+      color: "#FFFFFF",
+      border: "none",
+    },
+  })
+);
 
-const Login = (props) => {
+interface Props {
+  user: any;
+  login: any;
+}
+
+const Login: React.FC<Props> = ({ user, login }) => {
   const classes = useStyles();
   const history = useHistory();
-  const { user, login } = props;
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  // const { user, login } = props;
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.down("xs"));
 
-  const handleLogin = async (event) => {
+  const handleLogin = async (event: React.SyntheticEvent) => {
     event.preventDefault();
-    const username = event.target.username.value;
-    const password = event.target.password.value;
-
     await login({ username, password });
   };
 
@@ -95,6 +102,8 @@ const Login = (props) => {
               aria-label="username"
               label="Username"
               name="username"
+              value={username}
+              onChange={(e) => setUsername(e.currentTarget.value)}
               type="text"
             />
           </FormControl>
@@ -108,6 +117,8 @@ const Login = (props) => {
               label="Password"
               type="password"
               name="password"
+              value={password}
+              onChange={(e) => setPassword(e.currentTarget.value)}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -138,15 +149,15 @@ const Login = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
   return {
     user: state.user,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: any) => {
   return {
-    login: (credentials) => {
+    login: (credentials: number) => {
       dispatch(login(credentials));
     },
   };

@@ -3,10 +3,7 @@ import { Route, Switch, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchUser } from "./store/utils/thunkCreators";
 import { Home, SnackbarError } from "./components";
-import Signup from "./screens/Signup.js";
-import Login from "./screens/Login.js";
-import ForgotPassword from "./screens/ForgotPassword";
-import NotFound from "./screens/NotFound";
+import { Signup, Login, ForgotPassword, NotFound } from "./screens";
 
 export const path = {
   login: "/login",
@@ -15,8 +12,12 @@ export const path = {
   home: "/home",
 };
 
-const Routes = (props) => {
-  const { user, fetchUser } = props;
+interface Props {
+  user: any;
+  fetchUser: any;
+}
+
+const Routes: React.FC<Props> = ({ user, fetchUser }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [snackBarOpen, setSnackBarOpen] = useState(false);
 
@@ -36,7 +37,7 @@ const Routes = (props) => {
     }
   }, [user.error]);
 
-  if (props.user.isFetchingUser) {
+  if (user.isFetchingUser) {
     return <div>Loading...</div>;
   }
 
@@ -56,7 +57,7 @@ const Routes = (props) => {
         <Route
           exact
           path="/"
-          render={(props) => (props.user?.id ? <Home /> : <Signup />)}
+          render={(props) => (user?.id ? <Home /> : <Signup />)}
         />
         <Route path="/home" component={Home} />
         <Route>
@@ -67,13 +68,13 @@ const Routes = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
   return {
     user: state.user,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: any) => {
   return {
     fetchUser() {
       dispatch(fetchUser());

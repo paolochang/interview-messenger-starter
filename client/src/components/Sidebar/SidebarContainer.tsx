@@ -4,12 +4,18 @@ import { Sidebar } from "./index";
 import { searchUsers } from "../../store/utils/thunkCreators";
 import { clearSearchedUsers } from "../../store/conversations";
 
-const SidebarContainer = (props) => {
-  const { searchUsers, clearSearchedUsers } = props;
+interface Props {
+  searchUsers: any;
+  clearSearchedUsers: any;
+}
 
+const SidebarContainer: React.FC<Props> = ({
+  searchUsers,
+  clearSearchedUsers,
+}) => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const handleChange = async (event) => {
+  const handleChange = async (event: any) => {
     if (event.target.value === "") {
       // clear searched convos from redux store
       clearSearchedUsers();
@@ -28,14 +34,14 @@ const SidebarContainer = (props) => {
   return <Sidebar handleChange={handleChange} searchTerm={searchTerm} />;
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: any) => {
   return {
-    searchUsers: (username) => {
+    searchUsers: (username: string) => {
       dispatch(searchUsers(username));
     },
     clearSearchedUsers: () => {
       dispatch(clearSearchedUsers());
-    }
+    },
   };
 };
 

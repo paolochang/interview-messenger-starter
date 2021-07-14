@@ -1,20 +1,27 @@
 import React, { useEffect, useRef } from "react";
 import { Box } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { SenderBubble, OtherUserBubble } from "../ActiveChat";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { SenderBubble, OtherUserBubble } from ".";
 import moment from "moment";
 
-const useStyles = makeStyles((theme) => ({
-  chatbox: {
-    overflow: "scroll",
-    maxHeight: "66rem",
-  },
-}));
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    chatbox: {
+      overflow: "scroll",
+      maxHeight: "66rem",
+    },
+  })
+);
 
-const Messages = (props) => {
-  const { messages, otherUser, user } = props;
-  const classes = useStyles(props);
-  const messagesEndRef = useRef(null);
+interface Props {
+  messages: any;
+  otherUser: any;
+  user: any;
+}
+
+const Messages: React.FC<Props> = ({ messages, otherUser, user }) => {
+  const classes = useStyles();
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView();
@@ -26,7 +33,7 @@ const Messages = (props) => {
 
   return (
     <Box className={classes.chatbox}>
-      {messages.map((message) => {
+      {messages.map((message: any) => {
         const time = moment(message.createdAt).format("h:mm");
         return message.senderId === user.id ? (
           <SenderBubble

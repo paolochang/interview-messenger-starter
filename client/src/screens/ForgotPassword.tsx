@@ -6,58 +6,60 @@ import {
   FormControl,
   TextField,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { path } from "../routes";
 import AuthBox from "../components/AuthBox";
 import MetaDecorator from "../utils/MetaDecorator";
 
-const useStyles = makeStyles((theme) => ({
-  form: {
-    display: "flex",
-    justifyContent: "center",
-    width: "90%",
-  },
-  innerForm: {
-    width: "90%",
-  },
-  inputControl: {
-    width: "90%",
-    margin: "1rem 0",
-  },
-  welcomeText: {
-    fontSize: "2em",
-    fontWeight: "600",
-  },
-  forgetLink: {
-    "&:hover": {
-      cursor: "pointer",
-      textDecoration: "none",
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    form: {
+      display: "flex",
+      justifyContent: "center",
+      width: "90%",
     },
-  },
-  button: {
-    marginTop: "4em",
-  },
-  buttonPrimary: {
-    fontSize: "1em",
-    fontWeight: "600",
-    width: "12rem",
-    padding: "1em 0",
-    backgroundColor: theme.palette.primary.main,
-    color: "#FFFFFF",
-    border: "none",
-  },
-}));
+    innerForm: {
+      width: "90%",
+    },
+    inputControl: {
+      width: "90%",
+      margin: "1rem 0",
+    },
+    welcomeText: {
+      fontSize: "2em",
+      fontWeight: 600,
+    },
+    forgetLink: {
+      "&:hover": {
+        cursor: "pointer",
+        textDecoration: "none",
+      },
+    },
+    button: {
+      marginTop: "4em",
+    },
+    buttonPrimary: {
+      fontSize: "1em",
+      fontWeight: 600,
+      width: "12rem",
+      padding: "1em 0",
+      backgroundColor: theme.palette.primary.main,
+      color: "#FFFFFF",
+      border: "none",
+    },
+  })
+);
 
-const ForgotPassword = () => {
+const ForgotPassword: React.FC = () => {
   const classes = useStyles();
   const [email, setEmail] = useState("");
 
-  const handleLogin = async (event) => {
+  const handleLogin = async (event: React.SyntheticEvent) => {
     event.preventDefault();
     alert("find password, back-end is not implemented");
   };
 
-  const inputHandler = (event) => {
+  const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
 

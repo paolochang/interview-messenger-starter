@@ -9,57 +9,68 @@ import {
   TextField,
   FormHelperText,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { path } from "../routes";
 import { register } from "../store/utils/thunkCreators";
 import AuthBox from "../components/AuthBox";
 import MetaDecorator from "../utils/MetaDecorator";
 
-const useStyles = makeStyles((theme) => ({
-  form: {
-    display: "flex",
-    justifyContent: "center",
-    width: "90%",
-  },
-  createText: {
-    fontSize: "2em",
-    fontWeight: "600",
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "1.5em",
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    form: {
+      display: "flex",
+      justifyContent: "center",
+      width: "90%",
     },
-  },
-  innerForm: {
-    width: "90%",
-  },
-  inputControl: {
-    width: "90%",
-    margin: "1rem 0",
-  },
-  button: {
-    marginTop: "4em",
-  },
-  buttonPrimary: {
-    fontSize: "1em",
-    fontWeight: "600",
-    width: "12rem",
-    padding: "1em 0",
-    backgroundColor: theme.palette.primary.main,
-    color: "#FFFFFF",
-    border: "none",
-  },
-}));
+    createText: {
+      fontSize: "2em",
+      fontWeight: 600,
+      [theme.breakpoints.down("sm")]: {
+        fontSize: "1.5em",
+      },
+    },
+    innerForm: {
+      width: "90%",
+    },
+    inputControl: {
+      width: "90%",
+      margin: "1rem 0",
+    },
+    button: {
+      marginTop: "4em",
+    },
+    buttonPrimary: {
+      fontSize: "1em",
+      fontWeight: 600,
+      width: "12rem",
+      padding: "1em 0",
+      backgroundColor: theme.palette.primary.main,
+      color: "#FFFFFF",
+      border: "none",
+    },
+  })
+);
 
-const Signup = (props) => {
+interface FormErrorMessageProp {
+  confirmPassword?: string;
+}
+
+interface Props {
+  user: any;
+  register: any;
+}
+
+const Signup: React.FC<Props> = ({ user, register }) => {
   const classes = useStyles();
-  const { user, register } = props;
-  const [formErrorMessage, setFormErrorMessage] = useState({});
+  const [formErrorMessage, setFormErrorMessage] =
+    useState<FormErrorMessageProp>({});
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleRegister = async (event) => {
+  const handleRegister = async (event: React.SyntheticEvent) => {
     event.preventDefault();
-    const username = event.target.username.value;
-    const email = event.target.email.value;
-    const password = event.target.password.value;
-    const confirmPassword = event.target.confirmPassword.value;
 
     if (password !== confirmPassword) {
       setFormErrorMessage({ confirmPassword: "Passwords must match" });
@@ -93,6 +104,8 @@ const Signup = (props) => {
               aria-label="username"
               label="Username"
               name="username"
+              value={username}
+              onChange={(e) => setUsername(e.currentTarget.value)}
               type="text"
             />
           </FormControl>
@@ -102,6 +115,8 @@ const Signup = (props) => {
               aria-label="e-mail address"
               type="email"
               name="email"
+              value={email}
+              onChange={(e) => setEmail(e.currentTarget.value)}
             />
           </FormControl>
           <FormControl
@@ -115,6 +130,8 @@ const Signup = (props) => {
               type="password"
               inputProps={{ minLength: 6 }}
               name="password"
+              value={password}
+              onChange={(e) => setPassword(e.currentTarget.value)}
             />
             <FormHelperText>{formErrorMessage.confirmPassword}</FormHelperText>
           </FormControl>
@@ -129,6 +146,8 @@ const Signup = (props) => {
               type="password"
               inputProps={{ minLength: 6 }}
               name="confirmPassword"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.currentTarget.value)}
             />
             <FormHelperText>{formErrorMessage.confirmPassword}</FormHelperText>
           </FormControl>
@@ -148,15 +167,15 @@ const Signup = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
   return {
     user: state.user,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: any) => {
   return {
-    register: (credentials) => {
+    register: (credentials: any) => {
       dispatch(register(credentials));
     },
   };
