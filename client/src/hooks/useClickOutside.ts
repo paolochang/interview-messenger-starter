@@ -5,7 +5,6 @@ export const useClickOutside = (
   visibility: boolean,
   actionHandler: any
 ) => {
-  console.log(ref, visibility, actionHandler);
   useEffect(() => {
     const handleClick = (e: any) => {
       if (ref.current && !ref.current.contains(e.target)) {

@@ -6,9 +6,9 @@ import { useClickOutside } from "../../hooks/useClickOutside";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
-      position: "relative",
-      float: "right",
-      right: "4rem",
+      position: "absolute",
+      right: 60,
+      bottom: 10,
     },
   })
 );

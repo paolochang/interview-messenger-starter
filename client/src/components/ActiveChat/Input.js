@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {
+  Grid,
   FormControl,
   FilledInput,
   InputAdornment,
@@ -16,6 +17,9 @@ const styles = {
   root: {
     justifySelf: "flex-end",
     marginTop: 15,
+  },
+  emojiWrapper: {
+    position: "relative",
   },
   input: {
     height: 70,
@@ -118,13 +122,15 @@ class Input extends Component {
     const { classes } = this.props;
     return (
       <form className={classes.root} onSubmit={this.handleSubmit}>
-        {this.state.isEmoji && (
-          <EmojiInput
-            isBox={this.state.isEmoji}
-            setIsBox={this.handleEmojiBox}
-            pickEmoji={this.handleEmojiPick}
-          />
-        )}
+        <Grid container className={classes.emojiWrapper}>
+          {this.state.isEmoji && (
+            <EmojiInput
+              isBox={this.state.isEmoji}
+              setIsBox={this.handleEmojiBox}
+              pickEmoji={this.handleEmojiPick}
+            />
+          )}
+        </Grid>
         <FormControl fullWidth hiddenLabel required>
           <FilledInput
             ref={this.textRef}
