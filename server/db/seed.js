@@ -46,8 +46,14 @@ async function seed() {
   await Message.create({
     conversationId: santaigoConvo.id,
     senderId: thomas.id,
-    text: "Check this out!",
+    text: "Check these out!",
     attachments: ["file1", "file2"],
+  });
+  await Message.create({
+    conversationId: santaigoConvo.id,
+    senderId: thomas.id,
+    text: "and this😍",
+    attachments: ["file1"],
   });
 
   const chiumbo = await User.create({
@@ -115,7 +121,7 @@ async function seed() {
   await Message.create({
     conversationId: hualingConvo.id,
     senderId: thomas.id,
-    text: "😙",
+    text: "Photo sent",
     attachments: ["file1"],
   });
 
