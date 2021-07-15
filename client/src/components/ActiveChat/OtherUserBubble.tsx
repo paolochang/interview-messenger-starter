@@ -82,7 +82,9 @@ const OtherUserBubble: React.FC<Props> = ({
         )}
         {attachments !== null ? (
           <>
-            {attachments.length > 1 ? (
+            {attachments.length === 1 ? (
+              <ImageBubble attachment={attachments[0]} mine={mine} />
+            ) : (
               <Grid container className={classes.imageRow}>
                 {attachments.map((attachment, index) => (
                   <ImageBubble
@@ -93,15 +95,9 @@ const OtherUserBubble: React.FC<Props> = ({
                   />
                 ))}
               </Grid>
-            ) : (
-              <ImageBubble attachment={attachments[0]} mine={mine} />
             )}
           </>
-        ) : (
-          <Box className={classes.bubble}>
-            <Typography className={classes.text}>{text}</Typography>
-          </Box>
-        )}
+        ) : null}
         {link && <LinkBubble mine={mine} url={link[0]} />}
       </Box>
     </Box>
