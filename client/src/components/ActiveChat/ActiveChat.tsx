@@ -67,7 +67,6 @@ const ActiveChat: React.FC<Props> = ({ user, conversation: convo }) => {
               scrollToBottom={scrollToBottom}
               otherUser={conversation.otherUser}
               conversationId={conversation.id}
-              // user={user}
             />
           </Box>
         </>

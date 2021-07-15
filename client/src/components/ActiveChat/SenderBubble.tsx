@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: "flex-end",
       alignItems: "flex-end",
       maxWidth: "30rem",
+      marginTop: "0.3rem",
     },
     imageRow: {
       justifyContent: "flex-end",
@@ -119,32 +120,36 @@ const SenderBubble: React.FC<Props> = ({
                 />
               </div>
             ) : (
-              <div className={classes.mixContainer}>
-                <Typography className={classes.date}>{time}</Typography>
-                <Grid container className={classes.imageRow}>
-                  <ImageBubble attachment={attachments[0]} mine={mine} />
-                </Grid>
-                {text !== "Sent photo" && (
-                  <Box className={classes.bubbleWithSingle}>
-                    <Typography className={classes.text}>{text}</Typography>
-                  </Box>
+              <>
+                {attachments.length !== 0 ? (
+                  <div className={classes.mixContainer}>
+                    <Typography className={classes.date}>{time}</Typography>
+                    <Grid container className={classes.imageRow}>
+                      <ImageBubble attachment={attachments[0]} mine={mine} />
+                    </Grid>
+                    {text !== "Sent photo" && (
+                      <Box className={classes.bubbleWithSingle}>
+                        <Typography className={classes.text}>{text}</Typography>
+                      </Box>
+                    )}
+                    <Avatar
+                      alt={user.username}
+                      src={user.photoUrl}
+                      className={classes.avatar}
+                    />
+                  </div>
+                ) : (
+                  <div className={classes.mixContainer}>
+                    <Typography className={classes.date}>{time}</Typography>
+                    <Box className={classes.bubble}>
+                      <Typography className={classes.text}>{text}</Typography>
+                    </Box>
+                  </div>
                 )}
-                <Avatar
-                  alt={user.username}
-                  src={user.photoUrl}
-                  className={classes.avatar}
-                />
-              </div>
+              </>
             )}
           </>
-        ) : (
-          <div className={classes.mixContainer}>
-            <Typography className={classes.date}>{time}</Typography>
-            <Box className={classes.bubble}>
-              <Typography className={classes.text}>{text}</Typography>
-            </Box>
-          </div>
-        )}
+        ) : null}
         {link && <LinkBubble mine={mine} url={link[0]} />}
       </Box>
     </Box>
