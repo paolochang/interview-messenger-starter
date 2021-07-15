@@ -75,7 +75,7 @@ const OtherUserBubble: React.FC<Props> = ({
         <Typography className={classes.usernameDate}>
           {otherUser.username} {time}
         </Typography>
-        {attachments !== null && text !== "Sent photo" && (
+        {text !== "Photo sent" && (
           <Box className={classes.bubble}>
             <Typography className={classes.text}>{text}</Typography>
           </Box>

@@ -97,7 +97,24 @@ const SenderBubble: React.FC<Props> = ({
       <Box className={classes.subroot}>
         {attachments !== null ? (
           <>
-            {attachments.length > 1 ? (
+            {attachments.length === 1 ? (
+              <div className={classes.mixContainer}>
+                <Typography className={classes.date}>{time}</Typography>
+                <Grid container className={classes.imageRow}>
+                  <ImageBubble attachment={attachments[0]} mine={mine} />
+                </Grid>
+                {text !== "Photo sent" && (
+                  <Box className={classes.bubbleWithSingle}>
+                    <Typography className={classes.text}>{text}</Typography>
+                  </Box>
+                )}
+                <Avatar
+                  alt={user.username}
+                  src={user.photoUrl}
+                  className={classes.avatar}
+                />
+              </div>
+            ) : (
               <div className={classes.mixContainer}>
                 <Box className={classes.bubbleWithSingle}>
                   <Typography className={classes.text}>{text}</Typography>
@@ -119,37 +136,16 @@ const SenderBubble: React.FC<Props> = ({
                   className={classes.avatar}
                 />
               </div>
-            ) : (
-              <>
-                {attachments.length !== 0 ? (
-                  <div className={classes.mixContainer}>
-                    <Typography className={classes.date}>{time}</Typography>
-                    <Grid container className={classes.imageRow}>
-                      <ImageBubble attachment={attachments[0]} mine={mine} />
-                    </Grid>
-                    {text !== "Sent photo" && (
-                      <Box className={classes.bubbleWithSingle}>
-                        <Typography className={classes.text}>{text}</Typography>
-                      </Box>
-                    )}
-                    <Avatar
-                      alt={user.username}
-                      src={user.photoUrl}
-                      className={classes.avatar}
-                    />
-                  </div>
-                ) : (
-                  <div className={classes.mixContainer}>
-                    <Typography className={classes.date}>{time}</Typography>
-                    <Box className={classes.bubble}>
-                      <Typography className={classes.text}>{text}</Typography>
-                    </Box>
-                  </div>
-                )}
-              </>
             )}
           </>
-        ) : null}
+        ) : (
+          <div className={classes.mixContainer}>
+            <Typography className={classes.date}>{time}</Typography>
+            <Box className={classes.bubble}>
+              <Typography className={classes.text}>{text}</Typography>
+            </Box>
+          </div>
+        )}
         {link && <LinkBubble mine={mine} url={link[0]} />}
       </Box>
     </Box>
