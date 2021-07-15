@@ -103,7 +103,7 @@ const SenderBubble: React.FC<Props> = ({
                 <Grid container className={classes.imageRow}>
                   <ImageBubble attachment={attachments[0]} mine={mine} />
                 </Grid>
-                {text !== "Photo sent" && (
+                {text !== "Sent photo" && (
                   <Box className={classes.bubbleWithSingle}>
                     <Typography className={classes.text}>{text}</Typography>
                   </Box>
