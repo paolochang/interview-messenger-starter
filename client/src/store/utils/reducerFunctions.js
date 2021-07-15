@@ -1,9 +1,9 @@
 export const addConversationsToStore = (state, payload) => {
   const { conversations } = payload;
   return conversations.map((convo) => {
-    return  {
+    return {
       ...convo,
-      messages: convo.messages.reverse()
+      messages: convo.messages.reverse(),
     };
   });
 };
@@ -32,6 +32,11 @@ export const addMessageToStore = (state, payload) => {
       return convo;
     }
   });
+};
+
+export const holdAttachmentsToStore = (state, payload) => {
+  const { attachments } = payload;
+  return attachments;
 };
 
 export const addOnlineUserToStore = (state, id) => {

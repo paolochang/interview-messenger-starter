@@ -12,8 +12,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Messages = (props) => {
-  const { messages, otherUser, userId } = props;
-  const classes = useStyles();
+  const { messages, otherUser, user } = props;
+  const classes = useStyles(props);
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
@@ -28,15 +28,23 @@ const Messages = (props) => {
     <Box className={classes.chatbox}>
       {messages.map((message) => {
         const time = moment(message.createdAt).format("h:mm");
-
-        return message.senderId === userId ? (
-          <SenderBubble key={message.id} text={message.text} time={time} />
+        return message.senderId === user.id ? (
+          <SenderBubble
+            key={message.id}
+            user={user}
+            time={time}
+            text={message.text}
+            attachments={message.attachments}
+            mine={message.senderId === user.id}
+          />
         ) : (
           <OtherUserBubble
             key={message.id}
             text={message.text}
             time={time}
             otherUser={otherUser}
+            attachments={message.attachments}
+            mine={message.senderId === user.id}
           />
         );
       })}

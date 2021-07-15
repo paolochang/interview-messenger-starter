@@ -6,6 +6,7 @@ import {
   setNewMessage,
   setSearchedUsers,
 } from "../conversations";
+import { setNewAttachments } from "../attachments";
 import { gotUser, setFetchingStatus } from "../user";
 
 axios.interceptors.request.use(async function (config) {
@@ -107,6 +108,33 @@ export const postMessage = (body) => async (dispatch) => {
   } catch (error) {
     console.error(error);
   }
+};
+
+const sendAttachments = (data, body) => {
+  socket.emit("new-attachments", {
+    attachments: data.attachments,
+    sender: data.sender,
+  });
+};
+
+export const postAttachments = (body) => async (dispatch) => {
+  try {
+    const { attachments } = body;
+    const formData = new FormData();
+
+    const config = {
+      header: { "content-type": "multipart/form-data" },
+    };
+
+    for (let i = 0; i < attachments.length; i++) {
+      formData.append(`uploads`, attachments[i]);
+    }
+
+    const { data } = await axios.post("/api/attachments", formData, config);
+    dispatch(setNewAttachments(data.attachments));
+
+    sendAttachments(data, body);
+  } catch (error) {}
 };
 
 export const searchUsers = (searchTerm) => async (dispatch) => {

@@ -5,6 +5,7 @@ import {
   removeOfflineUser,
   addOnlineUser,
 } from "./store/conversations";
+import { setNewAttachments } from "./store/attachments";
 
 const socket = io(window.location.origin);
 
@@ -20,6 +21,10 @@ socket.on("connect", () => {
   });
   socket.on("new-message", (data) => {
     store.dispatch(setNewMessage(data.message, data.sender));
+  });
+
+  socket.on("new-attachments", (data) => {
+    store.dispatch(setNewAttachments(data.attachments, data.sender));
   });
 });
 
