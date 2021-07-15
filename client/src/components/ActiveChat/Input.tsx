@@ -1,4 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { connect } from "react-redux";
+import { postMessage, postAttachments } from "../../store/utils/thunkCreators";
 import {
   Grid,
   FormControl,
@@ -7,12 +9,9 @@ import {
   IconButton,
 } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { connect } from "react-redux";
-import { postMessage, postAttachments } from "../../store/utils/thunkCreators";
 import SentimentSatisfiedIcon from "@material-ui/icons/SentimentSatisfied";
 import PhotoLibraryIcon from "@material-ui/icons/PhotoLibrary";
 import EmojiInput from "./EmojiInput";
-import { useState } from "react";
 import { IUser } from "../../type";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -39,6 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
+  scrollToBottom: any;
   user: IUser;
   attachments: any;
   postMessage: any;
@@ -48,6 +48,7 @@ interface Props {
 }
 
 const Input: React.FC<Props> = ({
+  scrollToBottom,
   user,
   attachments,
   postMessage,
@@ -110,6 +111,7 @@ const Input: React.FC<Props> = ({
     await postMessage(reqBody);
     setText("");
     setImages([]);
+    scrollToBottom();
   };
 
   const handleImagesSelect = (event: any) => {

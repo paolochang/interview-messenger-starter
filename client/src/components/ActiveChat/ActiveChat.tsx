@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Box } from "@material-ui/core";
 import { Input, Header, Messages } from "./index";
@@ -33,6 +33,12 @@ const ActiveChat: React.FC<Props> = ({ user, conversation: convo }) => {
   const classes = useStyles();
   const conversation = convo || {};
 
+  const btmRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    btmRef.current?.scrollIntoView();
+  };
+
   return (
     <Box className={classes.root}>
       <MetaDecorator
@@ -51,11 +57,14 @@ const ActiveChat: React.FC<Props> = ({ user, conversation: convo }) => {
           />
           <Box className={classes.chatContainer}>
             <Messages
+              btmRef={btmRef}
+              scrollToBottom={scrollToBottom}
               messages={conversation.messages}
               otherUser={conversation.otherUser}
               user={user}
             />
             <Input
+              scrollToBottom={scrollToBottom}
               otherUser={conversation.otherUser}
               conversationId={conversation.id}
               // user={user}
