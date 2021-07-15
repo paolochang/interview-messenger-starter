@@ -43,6 +43,21 @@ async function seed() {
     senderId: santiago.id,
     text: "Share photo of your city, please",
   });
+  await Message.create({
+    conversationId: santaigoConvo.id,
+    senderId: thomas.id,
+    text: "Check these out!",
+    attachments: [
+      "https://res.cloudinary.com/demo/image/upload/sheep.png",
+      "https://res.cloudinary.com/demo/image/upload/b_lightblue/car_white.png",
+    ],
+  });
+  await Message.create({
+    conversationId: santaigoConvo.id,
+    senderId: thomas.id,
+    text: "and this😍",
+    attachments: ["https://res.cloudinary.com/demo/image/upload/dog.png"],
+  });
 
   const chiumbo = await User.create({
     username: "chiumbo",
@@ -61,6 +76,18 @@ async function seed() {
     text: "Sure! What time?",
   });
 
+  await Message.create({
+    conversationId: chiumboConvo.id,
+    senderId: thomas.id,
+    text: "Rogers center at 3!",
+  });
+
+  await Message.create({
+    conversationId: chiumboConvo.id,
+    senderId: thomas.id,
+    text: "https://www.google.ca/maps/place/Rogers+Centre/@43.6417798,-79.3913324,17z/data=!3m1!4b1!4m5!3m4!1s0x882b34d7b66a4a51:0xe210b2f6fe0b1405!8m2!3d43.6417798!4d-79.3891437",
+  });
+
   const hualing = await User.create({
     username: "hualing",
     email: "hualing@email.com",
@@ -68,12 +95,13 @@ async function seed() {
     photoUrl:
       "https://res.cloudinary.com/dmlvthmqr/image/upload/v1607914466/messenger/6c4faa7d65bc24221c3d369a8889928158daede4_vk5tyg.png",
   });
+
   const hualingConvo = await Conversation.create({
     user2Id: hualing.id,
     user1Id: thomas.id,
   });
 
-  for (let i = 0; i < 11; i++) {
+  for (let i = 0; i < 6; i++) {
     await Message.create({
       conversationId: hualingConvo.id,
       senderId: hualing.id,
@@ -84,7 +112,45 @@ async function seed() {
   await Message.create({
     conversationId: hualingConvo.id,
     senderId: hualing.id,
+    text: "https://www.youtube.com/watch?v=BkD2nN5275c",
+  });
+
+  await Message.create({
+    conversationId: hualingConvo.id,
+    senderId: hualing.id,
     text: "😂 😂 😂",
+  });
+
+  await Message.create({
+    conversationId: hualingConvo.id,
+    senderId: thomas.id,
+    text: "Sent photo",
+    attachments: ["https://res.cloudinary.com/demo/image/upload/sheep.png"],
+  });
+
+  const julia = await User.create({
+    username: "julia",
+    email: "julia@email.com",
+    password: "123456",
+    photoUrl:
+      "https://res.cloudinary.com/dmlvthmqr/image/upload/v1607914468/messenger/d9fc84a0d1d545d77e78aaad39c20c11d3355074_ed5gvz.png",
+  });
+
+  const juliaConvo = await Conversation.create({
+    user2Id: julia.id,
+    user1Id: thomas.id,
+  });
+
+  await Message.create({
+    conversationId: juliaConvo.id,
+    senderId: julia.id,
+    text: "Check this deal!",
+  });
+
+  await Message.create({
+    conversationId: juliaConvo.id,
+    senderId: julia.id,
+    text: "https://www.amazon.ca/gp/product/B085W6RZ1L?pf_rd_r=61G3JKBAA81587NMHVD5&pf_rd_p=05326fd5-c43e-4948-99b1-a65b129fdd73&pd_rd_r=2d29a7d8-1870-4fa1-bbc3-90044a1d40af&pd_rd_w=AZaM9&pd_rd_wg=oF9c3&ref_=pd_gw_unk",
   });
 
   const otherUsers = await Promise.all([
@@ -95,14 +161,6 @@ async function seed() {
       password: "123456",
       photoUrl:
         "https://res.cloudinary.com/dmlvthmqr/image/upload/v1607914466/messenger/68f55f7799df6c8078a874cfe0a61a5e6e9e1687_e3kxp2.png",
-    }),
-    User.create({
-      username: "julia",
-
-      email: "julia@email.com",
-      password: "123456",
-      photoUrl:
-        "https://res.cloudinary.com/dmlvthmqr/image/upload/v1607914468/messenger/d9fc84a0d1d545d77e78aaad39c20c11d3355074_ed5gvz.png",
     }),
     User.create({
       username: "cheng",

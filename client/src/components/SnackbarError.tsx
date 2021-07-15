@@ -1,0 +1,55 @@
+import React, { Dispatch, SetStateAction } from "react";
+import { Button, Snackbar } from "@material-ui/core";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import Close from "@material-ui/icons/Close";
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    snackbar: {
+      backgroundColor: "red",
+      fontWeight: "bold",
+    },
+    icon: {
+      color: "white",
+    },
+  })
+);
+
+interface Props {
+  snackBarOpen: boolean;
+  setSnackBarOpen: Dispatch<SetStateAction<boolean>>;
+  errorMessage: string;
+}
+
+const SnackbarError: React.FC<Props> = ({
+  snackBarOpen,
+  setSnackBarOpen,
+  errorMessage,
+}) => {
+  const classes = useStyles();
+  return (
+    <Snackbar
+      open={snackBarOpen}
+      onClose={() => setSnackBarOpen(false)}
+      message={errorMessage || "Sorry, an error occured. Please try again"}
+      action={
+        <React.Fragment>
+          <Button
+            className={classes.icon}
+            size="small"
+            onClick={() => setSnackBarOpen(false)}
+          >
+            <Close color="secondary" />
+          </Button>
+        </React.Fragment>
+      }
+      ContentProps={{
+        classes: {
+          root: classes.snackbar,
+        },
+      }}
+    />
+  );
+};
+
+export default SnackbarError;
