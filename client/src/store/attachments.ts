@@ -1,3 +1,4 @@
+import { AnyAction } from "redux";
 import { holdAttachmentsToStore } from "./utils/reducerFunctions";
 
 // ACTIONS
@@ -16,7 +17,7 @@ export const setNewAttachments = (
   };
 };
 
-const reducer = (state = "", action: any) => {
+const reducer = (state = "", action: AnyAction) => {
   switch (action.type) {
     case SET_ATTACHMENTS:
       return holdAttachmentsToStore(state, action.payload);

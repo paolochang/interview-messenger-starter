@@ -1,3 +1,7 @@
+export interface IError {
+  error: string;
+}
+
 export interface IUser {
   id: number;
   username: string;

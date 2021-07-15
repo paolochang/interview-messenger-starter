@@ -10,7 +10,12 @@ export const addConversationsToStore = (state: any, payload: any) => {
   });
 };
 
-export const addMessageToStore = (state: any, payload: any) => {
+interface IAddMessage {
+  message: IMessage;
+  sender: any;
+}
+
+export const addMessageToStore = (state: any, payload: IAddMessage) => {
   const { message, sender } = payload;
   // if sender isn't null, that means the message needs to be put in a brand new convo
   if (sender !== null) {
@@ -18,7 +23,7 @@ export const addMessageToStore = (state: any, payload: any) => {
       id: message.conversationId,
       otherUser: sender,
       messages: [message],
-      latestMessageText: null,
+      latestMessageText: "",
     };
     newConvo.latestMessageText = message.text;
     return [newConvo, ...state];

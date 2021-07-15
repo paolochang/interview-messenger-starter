@@ -1,3 +1,5 @@
+import { AnyAction } from "redux";
+
 const SET_ACTIVE_CHAT = "SET_ACTIVE_CHAT";
 
 export const setActiveChat = (username: number) => {
@@ -7,7 +9,7 @@ export const setActiveChat = (username: number) => {
   };
 };
 
-const reducer = (state = "", action: any) => {
+const reducer = (state = "", action: AnyAction) => {
   switch (action.type) {
     case SET_ACTIVE_CHAT: {
       return action.username;

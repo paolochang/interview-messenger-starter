@@ -1,4 +1,9 @@
-import { createStore, applyMiddleware, combineReducers } from "redux";
+import {
+  createStore,
+  applyMiddleware,
+  combineReducers,
+  AnyAction,
+} from "redux";
 import loggerMiddleware from "redux-logger";
 import thunkMiddleware from "redux-thunk";
 
@@ -22,7 +27,7 @@ const appReducer = combineReducers({
   attachments,
 });
 
-const rootReducer = (state: any, action: any) => {
+const rootReducer = (state: any, action: AnyAction) => {
   if (action.type === CLEAR_ON_LOGOUT) {
     // set state to initial state
     state = undefined;

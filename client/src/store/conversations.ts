@@ -1,3 +1,4 @@
+import { AnyAction } from "redux";
 import { IConversation, IMessage, IUser } from "../type";
 import {
   addConversationsToStore,
@@ -71,7 +72,7 @@ export const addConversation = (recipientId: number, newMessage: IMessage) => {
 
 // REDUCER
 
-const reducer = (state = [], action: any) => {
+const reducer = (state = [], action: AnyAction) => {
   switch (action.type) {
     case GET_CONVERSATIONS:
       return addConversationsToStore(state, action.payload);
