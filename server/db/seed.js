@@ -47,13 +47,16 @@ async function seed() {
     conversationId: santaigoConvo.id,
     senderId: thomas.id,
     text: "Check these out!",
-    attachments: ["file1", "file2"],
+    attachments: [
+      "https://res.cloudinary.com/demo/image/upload/sheep.png",
+      "https://res.cloudinary.com/demo/image/upload/b_lightblue/car_white.png",
+    ],
   });
   await Message.create({
     conversationId: santaigoConvo.id,
     senderId: thomas.id,
     text: "and this😍",
-    attachments: ["file1"],
+    attachments: ["https://res.cloudinary.com/demo/image/upload/dog.png"],
   });
 
   const chiumbo = await User.create({
@@ -76,7 +79,7 @@ async function seed() {
   await Message.create({
     conversationId: chiumboConvo.id,
     senderId: thomas.id,
-    text: "At 3!",
+    text: "Rogers center at 3!",
   });
 
   await Message.create({
@@ -121,8 +124,8 @@ async function seed() {
   await Message.create({
     conversationId: hualingConvo.id,
     senderId: thomas.id,
-    text: "Photo sent",
-    attachments: ["file1"],
+    text: "Sent photo",
+    attachments: ["https://res.cloudinary.com/demo/image/upload/sheep.png"],
   });
 
   const julia = await User.create({
