@@ -115,37 +115,41 @@ const SenderBubble: React.FC<Props> = ({
                 />
               </div>
             ) : (
-              <div className={classes.mixContainer}>
-                <Box className={classes.bubbleWithSingle}>
-                  <Typography className={classes.text}>{text}</Typography>
-                </Box>
-                <Grid container className={classes.imageRow}>
-                  {attachments.map((attachment, index) => (
-                    <ImageBubble
-                      key={index}
-                      mine={mine}
-                      attachment={attachment}
-                      size={"sm"}
+              <>
+                {attachments.length !== 0 ? (
+                  <div className={classes.mixContainer}>
+                    <Box className={classes.bubbleWithSingle}>
+                      <Typography className={classes.text}>{text}</Typography>
+                    </Box>
+                    <Grid container className={classes.imageRow}>
+                      {attachments.map((attachment, index) => (
+                        <ImageBubble
+                          key={index}
+                          mine={mine}
+                          attachment={attachment}
+                          size={"sm"}
+                        />
+                      ))}
+                    </Grid>
+                    <Typography className={classes.date}>{time}</Typography>
+                    <Avatar
+                      alt={user.username}
+                      src={user.photoUrl}
+                      className={classes.avatar}
                     />
-                  ))}
-                </Grid>
-                <Typography className={classes.date}>{time}</Typography>
-                <Avatar
-                  alt={user.username}
-                  src={user.photoUrl}
-                  className={classes.avatar}
-                />
-              </div>
+                  </div>
+                ) : (
+                  <div className={classes.mixContainer}>
+                    <Typography className={classes.date}>{time}</Typography>
+                    <Box className={classes.bubble}>
+                      <Typography className={classes.text}>{text}</Typography>
+                    </Box>
+                  </div>
+                )}
+              </>
             )}
           </>
-        ) : (
-          <div className={classes.mixContainer}>
-            <Typography className={classes.date}>{time}</Typography>
-            <Box className={classes.bubble}>
-              <Typography className={classes.text}>{text}</Typography>
-            </Box>
-          </div>
-        )}
+        ) : null}
         {link && <LinkBubble mine={mine} url={link[0]} />}
       </Box>
     </Box>
